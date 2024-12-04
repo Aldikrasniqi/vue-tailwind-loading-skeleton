@@ -1,28 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import PostCard from '@/components/ui/posts/PostCard.vue'
+import PostLoadingSkeleton from '@/components/ui/posts/PostLoadingSkeleton.vue'
+import { usePostsStore } from '@/stores/posts'
+import { onMounted } from 'vue'
 
-interface Post {
-	id: number
-	title: string
-	content: string
-}
-
-const posts = ref<Post[]>([])
-const isLoading = ref(true)
-
-const fetchPosts = async () => {
-	await new Promise((resolve) => setTimeout(resolve, 2000))
-	posts.value = Array.from({ length: 10 }, (_, i) => ({
-		id: i + 1,
-		title: `Post ${i + 1}`,
-		content:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-	}))
-	isLoading.value = false
-}
+const store = usePostsStore()
 
 onMounted(() => {
-	fetchPosts()
+	store.fetchPosts()
 })
 </script>
 
@@ -51,27 +36,16 @@ onMounted(() => {
 				Masonry Layout with Loading Skeletons
 			</h2>
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-				<template v-if="isLoading">
-					<div
-						v-for="n in 9"
-						:key="n"
-						class="bg-white rounded-lg shadow-md p-6 flex flex-col animate-pulse"
-					>
-						<div class="w-3/4 h-4 bg-gray-300 rounded mb-4"></div>
-						<div class="w-full h-4 bg-gray-300 rounded mb-2"></div>
-						<div class="w-5/6 h-4 bg-gray-300 rounded mb-2"></div>
-						<div class="w-3/4 h-4 bg-gray-300 rounded"></div>
-					</div>
+				<template v-if="store.loadPosts">
+					<PostLoadingSkeleton :numberOfSkeletons="store.posts.length" />
 				</template>
 				<template v-else>
-					<article
-						v-for="post in posts"
+					<PostCard
+						v-for="post in store.posts"
 						:key="post.id"
-						class="bg-white rounded-lg shadow-md p-6 flex flex-col"
-					>
-						<h3 class="text-xl font-semibold mb-2">{{ post.title }}</h3>
-						<p class="text-gray-600 flex-grow">{{ post.content }}</p>
-					</article>
+						:title="post.title"
+						:content="post.content"
+					/>
 				</template>
 			</div>
 		</section>

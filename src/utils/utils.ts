@@ -1,5 +1,5 @@
 import type { User } from '@/interfaces/user'
-
+import type { Post } from '@/interfaces/post'
 function getRandomId(): string {
 	const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 	return Array.from(
@@ -56,3 +56,37 @@ function generateUsers(count: number): User[] {
 }
 
 export const users = generateUsers(10)
+
+function getRandomTitle(): string {
+	const titles = [
+		'Hello World',
+		'How to learn React',
+		'Vue 3 is here',
+		'Angular 12 is out',
+		'Why Svelte is the best',
+		'What is Deno',
+		'Next.js vs Nuxt.js',
+		'Why GraphQL is the future',
+	]
+	return titles[Math.floor(Math.random() * titles.length)]
+}
+
+function getRandomContent(): string {
+	const contents = [
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac nisl a nunc ultrices tincidunt. Nulla facilisi. Nullam euismod, nunc at aliquet tristique, nunc eros aliquet nisi, nec fermentum orci nisl nec libero. Nulla facilisi. Nullam euismod, nunc at aliquet tristique, nunc eros aliquet nisi, nec fermentum orci nisl nec libero.',
+		'Sed ac nisl a nunc ultrices tincidunt. Nulla facilisi. Nullam euismod, nunc at aliquet tristique, nunc eros aliquet nisi, nec fermentum orci nisl nec libero. Nulla facilisi. Nullam euismod, nunc at aliquet tristique, nunc eros aliquet nisi, nec fermentum orci nisl nec libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+	]
+	return contents[Math.floor(Math.random() * contents.length)]
+}
+
+function generatePosts(count: number): Post[] {
+	return Array.from({ length: count }, () => {
+		return {
+			id: getRandomId(),
+			title: getRandomTitle(),
+			content: getRandomContent(),
+		}
+	})
+}
+
+export const posts = generatePosts(10)
