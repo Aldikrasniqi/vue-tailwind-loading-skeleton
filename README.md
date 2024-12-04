@@ -44,6 +44,11 @@ To get started with this project, follow these steps:
 
 5. Open your browser and visit `http://localhost:5173` (or the port shown in your terminal).
 
+You will see:
+
+![App Loading Screenshot](./src/assets/images/loading.png)
+![App Success Screenshot](./src/assets/images/success.png)
+
 ## Usage
 
 The main component of this project is `HomeView.vue` and `UsersView.vue`. It contains:
