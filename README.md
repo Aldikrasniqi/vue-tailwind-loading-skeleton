@@ -21,7 +21,7 @@ To get started with this project, follow these steps:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/yourusername/loading-skeleton-demo.git](https://github.com/Aldikrasniqi/vue-tailwind-loading-skeleton.git
+   git clone https://github.com/Aldikrasniqi/vue-tailwind-loading-skeleton.git
    ```
 
 2. Navigate to the project directory:
